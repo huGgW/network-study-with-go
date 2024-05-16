@@ -1,9 +1,7 @@
 package main
 
-import (
-	"network-study-with-go/ch04"
-)
+import "network-study-with-go/ch06/tftp"
 
 func main() {
-	ch04.Ping()
+	tftp.Cmd()
 }
