@@ -1,0 +1,8 @@
+services:
+  go-linux:
+    build:
+      context: .
+    volumes:
+      - ./:/usr/src/app
+    tty: true
+    stdin_open: true
