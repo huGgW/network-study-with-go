@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 	"os/user"
+	"fmt"
 
 	"golang.org/x/sys/unix"
 )
@@ -48,7 +49,7 @@ func Allowed(conn *net.UnixConn, groups map[string]struct{}) bool {
 	}
 
 	// Get User Information from user ID
-	u, err := user.LookupId(string(ucred.Uid))
+	u, err := user.LookupId(fmt.Sprint(ucred.Uid))
 	if err != nil {
 		log.Println(err)
 		return false
