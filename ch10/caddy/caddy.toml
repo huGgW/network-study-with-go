@@ -1,0 +1,26 @@
+[apps.http.servers.test_server]
+listen = [
+    'localhost:2020',
+]
+
+[[apps.http.servers.test_server.routes]]
+[[apps.http.servers.test_server.routes.match]]
+path = [
+    '/backend',
+    '/backend/*'
+]
+[[apps.http.servers.test_server.routes.handle]]
+handler = 'reverse_proxy'
+[[apps.http.servers.test_server.routes.handle.upstreams]] # reverse proxy할 대상
+dial = 'localhost:8080'
+
+[[apps.http.servers.test_server.routes]] # matcher 설정 X => default route (항상 마지막 순서에 설정해야함.)
+[[apps.http.servers.test_server.routes.handle]]
+handler = 'restrict_prefix'
+prefix = '.'
+[[apps.http.servers.test_server.routes.handle]]
+handler = 'file_server'
+root = './files'
+index_names = [
+    'index.html',
+]
